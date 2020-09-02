@@ -12,7 +12,7 @@ class OTPTextField extends StatefulWidget {
   final double fieldWidth;
 
   /// Manage the type of keyboard that shows up
-  TextInputType keyboardType;
+  final TextInputType keyboardType;
 
   /// The style to use for the text being edited.
   final TextStyle style;
@@ -26,13 +26,16 @@ class OTPTextField extends StatefulWidget {
 
   /// Text Field Style for field shape.
   /// default FieldStyle.underline [FieldStyle]
-  final FieldStyle fieldStyle;
+  // final FieldStyle fieldStyle;
 
   /// Callback function, called when a change is detected to the pin.
   final ValueChanged<String> onChanged;
 
   /// Callback function, called when pin is completed.
   final ValueChanged<String> onCompleted;
+
+  /// Underline Color of text field
+  final InputDecoration decoration;
 
   OTPTextField(
       {Key key,
@@ -43,7 +46,9 @@ class OTPTextField extends StatefulWidget {
       this.style = const TextStyle(),
       this.textFieldAlignment = MainAxisAlignment.spaceBetween,
       this.obscureText = false,
-      this.fieldStyle = FieldStyle.underline,
+      this.decoration,
+      // this.underLineColor,
+      // this.fieldStyle = FieldStyle.underline,
       this.onChanged,
       this.onCompleted})
       : assert(length > 1);
@@ -112,11 +117,7 @@ class _OTPTextFieldState extends State<OTPTextField> {
         style: widget.style,
         focusNode: _focusNodes[i],
         obscureText: widget.obscureText,
-        decoration: InputDecoration(
-            counterText: "",
-            border: widget.fieldStyle == FieldStyle.box
-                ? OutlineInputBorder(borderSide: BorderSide(width: 2.0))
-                : null),
+        decoration: widget.decoration,
         onChanged: (String str) {
           // Check if the current value at this position is empty
           // If it is move focus to previous text field.
