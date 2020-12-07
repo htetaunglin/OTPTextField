@@ -37,11 +37,14 @@ class OTPTextField extends StatefulWidget {
   /// Underline Color of text field
   final InputDecoration decoration;
 
+  final bool autoFocus;
+
   OTPTextField(
       {Key key,
       this.length = 4,
       this.width = 10,
       this.fieldWidth = 30,
+      this.autoFocus = false,
       this.keyboardType = TextInputType.number,
       this.style = const TextStyle(),
       this.textFieldAlignment = MainAxisAlignment.spaceBetween,
@@ -115,6 +118,7 @@ class _OTPTextFieldState extends State<OTPTextField> {
         textAlign: TextAlign.center,
         maxLength: 1,
         style: widget.style,
+        autofocus: widget.autoFocus && i == 0,
         focusNode: _focusNodes[i],
         obscureText: widget.obscureText,
         decoration: widget.decoration,
